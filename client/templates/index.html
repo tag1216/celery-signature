@@ -1,0 +1,10 @@
+<form method="post">
+  <div>task:<input name="task" value="{{ form.task }}"></div>
+  <div>val1:<input name="val1" value="{{ form.val1 }}"></div>
+  <div>val2:<input name="val2" value="{{ form.val2 }}"></div>
+  <div><input type="submit"></div>
+  {% if result %}
+  <div>{{ result }}</div>
+  {% endif %}
+</form>
+

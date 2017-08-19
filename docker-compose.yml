@@ -1,0 +1,29 @@
+
+version: '2'
+
+services:
+
+  redis:
+    image: redis
+
+  worker:
+    build: ./worker/
+    links:
+      - redis
+    volumes:
+      - ./worker/:/app/
+    command: celery worker -A tasks -l INFO
+
+  client:
+    build: ./client/
+    links:
+      - redis
+    volumes:
+      - ./client/:/app/
+    ports:
+      - 5000:5000
+    environment: 
+      - FLASK_APP=app.py
+      - FLASK_DEBUG=1
+    command: python -m flask run --host=0.0.0.0
+
